@@ -37,12 +37,10 @@ class StudentDetailFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.studentLD.observe(viewLifecycleOwner, Observer { student ->
-            // Update UI with student details
             binding.txtID.setText(student.id ?: "")
             binding.txtName.setText(student.name ?: "")
             binding.txtBod.setText(student.bod ?: "")
             binding.txtPhone.setText(student.phone ?: "")
-            // You can ignore the button update as per the hint
         })
     }
 
