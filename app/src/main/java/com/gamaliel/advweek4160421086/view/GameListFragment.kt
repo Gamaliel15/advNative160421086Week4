@@ -1,6 +1,5 @@
 package com.gamaliel.advweek4160421086.view
 
-import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,69 +7,66 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gamaliel.advweek4160421086.R
+import com.gamaliel.advweek4160421086.databinding.FragmentGameListBinding
 import com.gamaliel.advweek4160421086.databinding.FragmentStudentListBinding
+import com.gamaliel.advweek4160421086.viewmodel.GameViewModel
 import com.gamaliel.advweek4160421086.viewmodel.ListViewModel
 
 
-class StudentListFragment : Fragment() {
-
-    private lateinit var binding: FragmentStudentListBinding
-    private lateinit var viewModel: ListViewModel
-    private val studentListAdapter = StudentListAdapter(arrayListOf())
+class GameListFragment : Fragment() {
+    private lateinit var binding: FragmentGameListBinding
+    private lateinit var viewModel: GameViewModel
+    private val gameListAdapter = GameListAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentStudentListBinding.inflate(inflater,container,false)
-
+        binding = FragmentGameListBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         viewModel.refresh()
 
-        binding.recView.layoutManager = LinearLayoutManager(context)
-        binding.recView.adapter = studentListAdapter
+        binding.recViewGame.layoutManager = LinearLayoutManager(context)
+        binding.recViewGame.adapter = gameListAdapter
 
         observeViewModel()
 
         binding.refreshLayout.setOnRefreshListener {
             viewModel.refresh()
-            binding.recView.visibility = View.GONE
-            binding.txtError.visibility = View.GONE
-            binding.progressLoad.visibility = View.VISIBLE
+            binding.recViewGame.visibility = View.GONE
+
             binding.refreshLayout.isRefreshing = false
         }
 
     }
-
-    fun observeViewModel(){
-        viewModel.studentsLD.observe(viewLifecycleOwner, Observer {
-            studentListAdapter.updateStudentList(it)
+    fun observeViewModel() {
+        viewModel.gamesLD.observe(viewLifecycleOwner, Observer {
+            gameListAdapter.updateGameList(it)
         })
 
-        viewModel.studentLoadErrorLD.observe(viewLifecycleOwner, Observer {
-            if(it==true){
+        viewModel.gameLoadErrorLD.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
                 binding.txtError.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.txtError.visibility = View.GONE
             }
         })
 
-        viewModel.loadingLD.observe(viewLifecycleOwner, Observer {
-            if(it==true){
+        viewModel.gameLoadLD.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
                 binding.progressLoad.visibility = View.VISIBLE
-                binding.recView.visibility = View.GONE
-            }else{
+                binding.recViewGame.visibility = View.GONE
+            } else {
                 binding.progressLoad.visibility = View.GONE
-                binding.recView.visibility = View.VISIBLE
+                binding.recViewGame.visibility = View.VISIBLE
             }
         })
     }

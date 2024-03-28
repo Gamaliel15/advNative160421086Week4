@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/studentListFragment">
+    app:startDestination="@id/gameListFragment">
 
     <fragment
         android:id="@+id/studentDetailFragment"
@@ -18,5 +18,13 @@
         <action
             android:id="@+id/actionstudentdetailfragment"
             app:destination="@id/studentDetailFragment" />
+        <action
+            android:id="@+id/actiongamelistfragment"
+            app:destination="@id/gameListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/gameListFragment"
+        android:name="com.gamaliel.advweek4160421086.view.GameListFragment"
+        android:label="fragment_game_list"
+        tools:layout="@layout/fragment_game_list" />
 </navigation>

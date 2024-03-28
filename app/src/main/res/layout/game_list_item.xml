@@ -33,37 +33,46 @@
                 app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <TextView
-                android:id="@+id/txtId"
+                android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="16dp"
-                android:text="ID"
+                android:text="Game Title"
+                android:textSize="24sp"
                 app:layout_constraintStart_toEndOf="@+id/imageViewGame"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtName"
+                android:id="@+id/txtGenre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="12dp"
-                android:text="Student Name"
-                android:textSize="24sp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:text="Genre"
                 app:layout_constraintStart_toEndOf="@+id/imageViewGame"
-                app:layout_constraintTop_toBottomOf="@+id/txtId" />
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
             <Button
                 android:id="@+id/btnDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="12dp"
                 android:text="Detail"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtName" />
+                app:layout_constraintTop_toBottomOf="@+id/txtPlatforms" />
+
+            <TextView
+                android:id="@+id/txtPlatforms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:text="Platforms"
+                app:layout_constraintStart_toEndOf="@+id/imageViewGame"
+                app:layout_constraintTop_toBottomOf="@+id/txtGenre" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
