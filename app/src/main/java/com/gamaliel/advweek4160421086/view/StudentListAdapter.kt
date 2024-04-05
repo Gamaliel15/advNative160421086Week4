@@ -1,11 +1,16 @@
 package com.gamaliel.advweek4160421086.view
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.gamaliel.advweek4160421086.databinding.StudentListItemBinding
 import com.gamaliel.advweek4160421086.model.Student
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 class StudentListAdapter(val studentList:ArrayList<Student>)
     :RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>(){
@@ -25,9 +30,27 @@ class StudentListAdapter(val studentList:ArrayList<Student>)
         holder.binding.txtId.text = studentList[position].id
         holder.binding.txtName.text = studentList[position].name
         holder.binding.btnDetail.setOnClickListener{
-            val action = StudentListFragmentDirections.actionstudentdetailfragment()
+            val action = StudentListFragmentDirections.actionstudentdetailfragment(holder.binding.txtId.text.toString())
             Navigation.findNavController(it).navigate(action)
         }
+
+        val picasso = Picasso.Builder(holder.itemView.context)
+        picasso.listener { picasso, uri, exception ->
+            exception.printStackTrace()
+        }
+        picasso.build().load(studentList[position].photoUrl).into(holder.binding.imageViewGame, object:Callback{
+            override fun onSuccess() {
+                holder.binding.progressBar.visibility = View.INVISIBLE
+                holder.binding.imageViewGame.visibility = View.VISIBLE
+
+            }
+
+            override fun onError(e: Exception?) {
+                Log.e("picasso_error", e.toString())
+            }
+
+        })
+
     }
 
     fun updateStudentList(newStudentList:ArrayList<Student>){
