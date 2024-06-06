@@ -24,7 +24,7 @@ class ListViewModel(application: Application):AndroidViewModel(application) {
 
 
     fun refresh(){
-
+        
         studentLoadErrorLD.value = false
         loadingLD.value = true
 

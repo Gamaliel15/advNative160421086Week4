@@ -71,6 +71,17 @@ class StudentDetailFragment : Fragment() {
                 }
             })
 
+            binding.btnNotif.setOnClickListener {
+                Observable.timer(3, TimeUnit.SECONDS)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        Log.d("Messages", "five seconds")
+                        MainActivity.showNotification(student.name.toString(),
+                            "A new notification created",
+                            R.drawable.baseline_person_add_24)
+                    }
+            }
 
             binding.btnUpdate?.setOnClickListener {
                 Observable.timer(3, TimeUnit.SECONDS)
@@ -82,6 +93,7 @@ class StudentDetailFragment : Fragment() {
                             "A new notification created",
                             R.drawable.baseline_person_add_24)
                     }
+
                 val name = it.id.toString()
                 binding.txtID.isEnabled = true
 
